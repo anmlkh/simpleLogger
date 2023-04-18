@@ -13,7 +13,11 @@ app.use(morgan('dev'));
 // Create a route for handling post requests
 app.post('/api/log', (req, res) => {
   console.log(req.body);
-  res.send('Post received');
+  if (req.body.payload.Input === 'Error') {
+    res.status(403).end();
+  } else {
+    res.send('Post received');
+  }
 });
 
 // Start the server
